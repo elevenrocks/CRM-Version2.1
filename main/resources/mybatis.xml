@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd"><!--约束文件名称-->
+<!--环境配置:数据库的连接信息-->
+<configuration>
+    <!--指定properties文件路径，类路径的根开始找-->
+    <properties resource="jdbc.properties"/>
+    <!--sql执行日志设置-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!--<typeAliases>
+        &lt;!&ndash;    第一种方式:定义别名,指定一个类型一个自定义别名&ndash;&gt;
+        <typeAlias type="com.eleven.crm.settings.domain.User" alias="User"/>
+        <typeAlias type="com.eleven.crm.workbench.domain.Activity" alias="Activity"/>
+        
+        &lt;!&ndash;        第二种方式:定义别名:&ndash;&gt;
+        &lt;!&ndash;<package name="com.eleven.vo"/>&ndash;&gt;
+      &lt;!&ndash;  <package name="com.eleven.crm.settings.domain"/>
+
+        <package name="com.eleven.crm.workbench.domain"/>&ndash;&gt;
+    </typeAliases>-->
+
+    <!--配置分页查询插件-->
+   <!-- <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>-->
+
+    <!--default的名字和id一样,真实项目的数据库名称-->
+    <environments default="crm">
+        <!--环境名-->
+        <environment id="crm">
+            <!--mybatis的事务类型-->
+            <transactionManager type="JDBC"/>
+            <!--数据源连接数据库的,pooled标识连接池-->
+            <dataSource type="POOLED">
+                <!--这些name是不可修改-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--sql映射文件-->
+    <mappers>
+        <!--第一种方式-->
+        <!--<mapper resource="com/eleven/dao/EmpDao.xml"/>-->
+        <!--第二种-->
+        <package name="com.eleven.crm.settings.dao"/>
+        <package name="com.eleven.crm.workbench.dao"/>
+    </mappers>
+
+</configuration>
+        <!--mybatis的主配置文件-->
